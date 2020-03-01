@@ -11,13 +11,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $category)
-                    <tr>
-                        <td>{{$category->name}}</td>
-                        <td><a href="{{route('category.edit',['id'=>$category->id])}}" class="btn btn-sm btn-info">Edit</a></td>
-                        <td><a href="{{route('category.destroy',['id'=>$category->id])}}" class="btn btn-sm btn-danger">Delete</a></td>
-                    </tr>
-                @endforeach
+                @if($categories->count()>0)
+                    @foreach($categories as $category)
+                        <tr>
+                            <td>{{$category->name}}</td>
+                            <td><a href="{{route('category.edit',['id'=>$category->id])}}" class="btn btn-sm btn-info">Edit</a></td>
+                            <td><a href="{{route('category.destroy',['id'=>$category->id])}}" class="btn btn-sm btn-danger">Delete</a></td>
+                        </tr>
+                    @endforeach
+                @else
+                   <tr><td colspan="4" class="text-center">No Categories</td></tr>
+                @endif
                 </tbody>
             </table>
         </div>
