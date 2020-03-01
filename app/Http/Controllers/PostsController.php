@@ -126,4 +126,11 @@ class PostsController extends Controller
         Session::flush('info', 'The post has been deleted.');
         return redirect()->back();        
     }
+    public function restore($id){
+        // $post = Post::find($id);
+        $post = Post::withTrashed()->where('id',$id)->first();
+        $post->restore();
+        Session::flush('success', 'The post has been restored.');
+        return redirect()->back();        
+    }
 }
