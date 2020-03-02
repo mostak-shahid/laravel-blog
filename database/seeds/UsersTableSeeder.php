@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         ]);
         App\Profile::create([
           'user_id' => $user->id,
-          'avatar' => 'Avatar Image',
+          'avatar' => 'uploads/avatars/1.png',
           'about' => 'About him',
           'facebook' => 'facebook.com',
           'youtube' => 'youtube.com',
