@@ -22,6 +22,18 @@
 							<label for="featured">Featured Image</label>
 							<input name="featured" type="file" class="form-control-file" id="featured">
 						</div>
+                            @foreach($tags as $tag)                              
+                                <div class="form-check form-check-inline">
+                                    <input name="tags[]" class="form-check-input" type="checkbox" id="inlineCheckbox{{$tag->id}}" value="{{$tag->id}}"
+                                    @foreach($post->tags as $selected_tag)
+                                        @if($selected_tag->id == $tag->id)
+                                        checked
+                                        @endif
+                                    @endforeach
+                                    >
+                                    <label class="form-check-label" for="inlineCheckbox{{$tag->id}}">{{$tag->tag}}</label>
+                                </div>
+                            @endforeach
                 		<div class="form-group">
 	                		<label for="content">Content</label>
 	                		<textarea name="content" type="text" class="form-control" id="content">{{$post->content}}</textarea>

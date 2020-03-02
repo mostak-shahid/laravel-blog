@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -29,11 +30,12 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         if (!$categories->count()){
             Session::flash('info','You must have some categories before attempting to create a post.');
             return redirect()->back();
         }
-        return view('admin.posts.create')->with('categories',$categories);
+        return view('admin.posts.create')->with('categories',$categories)->with('tags',$tags);
     }
 
     /**
@@ -63,6 +65,7 @@ class PostsController extends Controller
             'content'=>$request->content,
             'category_id'=>$request->category_id,
         ]);
+        $post->tags()->attach($request->tags);
         // return redirect()->back();
         return view('admin.posts.index')->with('posts',Post::all());
 
@@ -89,7 +92,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('admin.posts.edit')->with('post',$post)->with('categories',Category::all());
+        return view('admin.posts.edit')->with('post',$post)->with('categories',Category::all())->with('tags',Tag::all());
     }
 
     /**
@@ -118,6 +121,7 @@ class PostsController extends Controller
         $post->content = $request->content;
         $post->category_id = $request->category_id;
         $post->save();
+        $post->tags()->sync($request->tags);
         Session::flash('success','Your post has been updated.');
         return redirect()->route('posts');
     }
