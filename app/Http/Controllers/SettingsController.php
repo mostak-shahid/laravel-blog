@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use Session;
+use App\Setting;
 
-class CategoriesController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index')->with('categories',Category::all());
+        $settings = Setting::all();
+        return view('admin.settings.index')->with('settings',$settings);
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        //
     }
 
     /**
@@ -36,14 +36,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|max:255'
-        ]);
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-        Session::flash('success', 'Category has been created');
-        return redirect()->route('categories');
+        //
     }
 
     /**
@@ -65,9 +58,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.edit')->with('category', $category);
-        
+        //
     }
 
     /**
@@ -79,11 +70,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->save();
-        Session::flash('success', 'Category has been updated');
-        return redirect()->route('categories');
+        //
     }
 
     /**
@@ -94,12 +81,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        foreach($category->posts as $post){
-            $post->forceDelete();
-        }
-        $category->delete();
-        Session::flash('info', 'Category has been deleted');
-        return redirect()->back();
+        //
     }
 }

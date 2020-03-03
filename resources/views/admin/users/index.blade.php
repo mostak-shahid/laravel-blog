@@ -24,7 +24,11 @@
                                 <a href="{{route('user.makeadmin',['id'=>$user->id])}}" class="btn btn-sm btn-success">Make Admin</a>
                             @endif
                             </td>
-                            <td>Delete</td>
+                            <td>
+                            @if(!Auth::id())
+                            <a href="{{route('user.destroy',['id'=>$user->id])}}" class="btn btn-sm btn-danger">Delete</a>
+                            @endif
+                            </td>
                         </tr>
                     @endforeach
                 @else

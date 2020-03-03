@@ -42,3 +42,14 @@
                 </div>
             </div>
 @endsection
+@section('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+@endsection
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script>
+jQuery(document).ready(function($){
+    $('#content').summernote();
+});
+</script>
+@endsection

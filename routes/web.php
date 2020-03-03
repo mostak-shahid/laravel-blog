@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test',function(){
-	return App\User::find(1)->profile;
+	// return App\User::find(1)->profile;
+	return App\Setting::all()->where("option_name","site_phone"); //"option_name": "site_phone",
 });
 
 Auth::routes();
@@ -51,7 +52,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
 		Route::get('/users',['uses'=>'UsersController@index', 'as'=>'users']);
 		Route::get('/user/create',['uses'=>'UsersController@create', 'as'=>'user.create']);
 		Route::post('/user/store',['uses'=>'UsersController@store', 'as'=>'user.store']);
+		Route::get('/user/destroy/{id}',['uses'=>'UsersController@destroy', 'as'=>'user.destroy']);
 		Route::get('/user/makeadmin/{id}',['uses'=>'UsersController@makeadmin', 'as'=>'user.makeadmin']);
 		Route::get('/user/removeadmin/{id}',['uses'=>'UsersController@removeadmin', 'as'=>'user.removeadmin']);
 	// });
+
+	Route::get('/settings',['uses'=>'SettingsController@index','as'=>'settings']);
+	Route::get('/profile',['uses'=>'ProfilesController@index','as'=>'profile']);
+	Route::post('/profile/update',['uses'=>'ProfilesController@update','as'=>'profile.update']);
 });
