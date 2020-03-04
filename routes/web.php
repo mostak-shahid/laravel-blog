@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 Route::get('/test',function(){
 	// return App\User::find(1)->profile;
-	return App\Setting::all()->where("option_name","site_phone"); //"option_name": "site_phone",
+	// return App\Setting::all()->where("option_name","site_phone"); //"option_name": "site_phone",
+	return App\Post::orderBy('id','desc')->get();
 });
 
 Auth::routes();

@@ -111,6 +111,7 @@
                             <li class="list-group-item"><a href="{{route('users')}}">Users</a></li>
                             <li class="list-group-item"><a href="{{route('user.create')}}">Create new user</a></li>
                             <li class="list-group-item"><a href="{{route('profile')}}">Update Profile</a></li>
+                            <li class="list-group-item"><a href="{{route('settings')}}">Settings</a></li>
                             @endif
                         </ul>
                     </div>
